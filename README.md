@@ -316,20 +316,30 @@ git clone https://github.com/unitreerobotics/unitree_rl_lab.git
 git clone https://github.com/HeYee03/unitree_mujoco.git
 ```
 
-克隆完成后，再把单独提供的两个脚本覆盖到 `unitree_rl_lab/scripts/` 目录：
+克隆完成后，从下面这个仓库拉取脚本并放到 `unitree_rl_lab/scripts/`：
 
-```text
-unitree_rl_lab/scripts/virtual_keyboard_publisher.py
-unitree_rl_lab/scripts/run_g1_cpp_bridge.sh
+```bash
+cd ~/Desktop/project2
+git clone https://github.com/HeYee03/virtual_keyboard.git
+
+cp virtual_keyboard/virtual_keyboard_publisher.py unitree_rl_lab/scripts/
+cp virtual_keyboard/run_g1_cpp_bridge.sh unitree_rl_lab/scripts/
+chmod +x unitree_rl_lab/scripts/run_g1_cpp_bridge.sh
 ```
 
-也就是说，这两个文件不要直接使用仓库里原始版本，而是使用单独发给你的版本。
+如果提示权限不够（`Permission denied`），就使用：
+
+```bash
+sudo cp virtual_keyboard/virtual_keyboard_publisher.py unitree_rl_lab/scripts/
+sudo cp virtual_keyboard/run_g1_cpp_bridge.sh unitree_rl_lab/scripts/
+sudo chmod +x unitree_rl_lab/scripts/run_g1_cpp_bridge.sh
+```
 
 注意：
 
 - `unitree_mujoco` 必须是你修改过、支持虚拟键盘的版本
-- `unitree_rl_lab/scripts/virtual_keyboard_publisher.py` 和 `unitree_rl_lab/scripts/run_g1_cpp_bridge.sh` 需要替换成单独提供的版本
-- 如果仓库里还有根目录下的 `virtual_keyboard_publisher.py`，以你单独提供并实际约定使用的版本为准
+- `unitree_rl_lab/scripts/virtual_keyboard_publisher.py` 和 `unitree_rl_lab/scripts/run_g1_cpp_bridge.sh` 请以 `https://github.com/HeYee03/virtual_keyboard` 里的版本为准
+- 复制文件时如果遇到权限问题，直接在 `cp/chmod` 前加 `sudo`
 
 
 ## 九、配置 `unitree_mujoco`
