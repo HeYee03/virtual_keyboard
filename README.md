@@ -31,7 +31,7 @@ cp "$VK_REPO/run_g1_cpp_bridge.sh" \
 cp "$VK_REPO/virtual_controller_gui.py" \
   unitree_deploy/unitree_mujoco/simulate_python/virtual_controller_gui.py
 
-cp "$VK_REPO/g1_29dof_main.cpp" \
+cp "$VK_REPO/deploy/robots/g1_29dof/main.cpp" \
   unitree_deploy/deploy/robots/g1_29dof/main.cpp
 
 chmod +x unitree_deploy/scripts/run_g1_cpp_bridge.sh
