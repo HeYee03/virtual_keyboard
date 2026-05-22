@@ -10,18 +10,28 @@
 
 ## 文件放置位置
 
-把本仓库里的文件复制到 `unitree_rl_lab-main/unitree_deploy` 对应位置：
+本说明不依赖固定目录。先设置两个变量：
+
+- `UNITREE_ROOT`：你的 Unitree RL Lab 根目录
+- `VK_REPO`：本 `virtual_keyboard` 仓库目录
 
 ```bash
-cd /home/heyee/unitree_rl_lab-main
+export UNITREE_ROOT=/path/to/unitree_rl_lab
+export VK_REPO=/path/to/virtual_keyboard
+```
 
-cp virtual_keyboard/run_g1_cpp_bridge.sh \
+把本仓库里的文件复制到 `unitree_deploy` 对应位置：
+
+```bash
+cd "$UNITREE_ROOT"
+
+cp "$VK_REPO/run_g1_cpp_bridge.sh" \
   unitree_deploy/scripts/run_g1_cpp_bridge.sh
 
-cp virtual_keyboard/virtual_controller_gui.py \
+cp "$VK_REPO/virtual_controller_gui.py" \
   unitree_deploy/unitree_mujoco/simulate_python/virtual_controller_gui.py
 
-cp virtual_keyboard/g1_29dof_main.cpp \
+cp "$VK_REPO/g1_29dof_main.cpp" \
   unitree_deploy/deploy/robots/g1_29dof/main.cpp
 
 chmod +x unitree_deploy/scripts/run_g1_cpp_bridge.sh
@@ -30,7 +40,7 @@ chmod +x unitree_deploy/scripts/run_g1_cpp_bridge.sh
 `virtual_keyboard_publisher.py` 仍然是虚拟键盘 DDS 发布脚本。如果目标仓库缺少它，也复制到：
 
 ```bash
-cp virtual_keyboard/virtual_keyboard_publisher.py \
+cp "$VK_REPO/virtual_keyboard_publisher.py" \
   unitree_deploy/scripts/virtual_keyboard_publisher.py
 ```
 
@@ -39,7 +49,7 @@ cp virtual_keyboard/virtual_keyboard_publisher.py \
 确认外层 MuJoCo 配置：
 
 ```text
-/home/heyee/unitree_rl_lab-main/unitree_mujoco/simulate/config.yaml
+$UNITREE_ROOT/unitree_mujoco/simulate/config.yaml
 ```
 
 关键项应为：
@@ -64,14 +74,14 @@ unitree_deploy/deploy/robots/g1_29dof/config/policy/mimic/gangnam_style/exported
 ## 编译
 
 ```bash
-cd /home/heyee/unitree_rl_lab-main/unitree_deploy/deploy/robots/g1_29dof/build
+cd "$UNITREE_ROOT/unitree_deploy/deploy/robots/g1_29dof/build"
 make -j$(nproc)
 ```
 
 如果还没有 build 目录：
 
 ```bash
-cd /home/heyee/unitree_rl_lab-main/unitree_deploy/deploy/robots/g1_29dof
+cd "$UNITREE_ROOT/unitree_deploy/deploy/robots/g1_29dof"
 mkdir -p build
 cd build
 cmake ..
@@ -83,7 +93,7 @@ make -j$(nproc)
 打开 3 个终端，全部从根目录启动：
 
 ```bash
-cd /home/heyee/unitree_rl_lab-main
+cd "$UNITREE_ROOT"
 ```
 
 终端 A：
