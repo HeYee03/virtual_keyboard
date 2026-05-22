@@ -3,9 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+DEPLOY_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 SIM_BUILD_DIR="${ROOT_DIR}/unitree_mujoco/simulate/build"
-CTRL_BUILD_DIR="${ROOT_DIR}/deploy/robots/g1_29dof/build"
+CTRL_BUILD_DIR="${DEPLOY_DIR}/deploy/robots/g1_29dof/build"
 
 SIM_BIN="${SIM_BUILD_DIR}/unitree_mujoco"
 CTRL_BIN="${CTRL_BUILD_DIR}/g1_ctrl"
@@ -60,7 +61,7 @@ case "${cmd}" in
     exec ./g1_ctrl "$@"
     ;;
   vkb)
-    exec python3 "${ROOT_DIR}/unitree_deploy/scripts/virtual_keyboard_publisher.py" "$@"
+    exec python3 "${DEPLOY_DIR}/scripts/virtual_keyboard_publisher.py" "$@"
     ;;
   check)
     check_bins
